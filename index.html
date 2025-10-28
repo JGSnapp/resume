@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Кирилл Костенко — Резюме (purple)</title>
+  <style>
+    /* ===== RESET ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ===== THEME (PURPLE NEON) ===== */
+    :root {
+      --bg-main: #0a0612;
+      --bg-panel: #120d1f;
+      --bg-header: #1b122c;
+      --border-color: #3a2d53;
+      --border-glow: rgba(187, 51, 255, 0.4);
+
+      --text-primary: #f2e9ff;
+      --text-dim: #7b6e92;
+      --text-accent: #d17fff;
+      --text-section: #bf5fff;
+      --text-date: #ad8bff;
+
+      --radius-lg: 14px;
+      --radius-md: 8px;
+
+      --font-main: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(187,51,255,0.08) 0%, transparent 60%),
+        radial-gradient(circle at 80% 10%, rgba(51,102,255,0.07) 0%, transparent 60%);
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      line-height: 1.5;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1000px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+      }
+    }
+
+    /* ===== TERMINAL WINDOW CHROME ===== */
+    .terminal {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(187, 51, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal__header {
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: -0.03em;
+    }
+
+    .terminal__controls {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px currentColor;
+    }
+    .dot--close  { background: #ff5f57; color: #ff5f57; }
+    .dot--min    { background: #febc2e; color: #febc2e; }
+    .dot--max    { background: #28c840; color: #28c840; }
+
+    .terminal__title {
+      color: var(--text-dim);
+      text-align: center;
+      flex: 1;
+      font-size: 0.75rem;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .terminal__body {
+      padding: 1.25rem 1rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 480px) {
+      .terminal__body {
+        padding: 1.5rem 1.5rem 2rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* ===== HEADER / NAME CARD ===== */
+    .intro-block {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 480px) {
+      .intro-block {
+        grid-template-columns: 1fr auto;
+        align-items: start;
+      }
+    }
+
+    .name-role {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .name {
+      font-size: clamp(1.25rem, 1vw + 1rem, 1.4rem);
+      font-weight: 600;
+      color: var(--text-accent);
+      text-shadow: 0 0 16px rgba(191,95,255,0.6);
+    }
+
+    .role {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: var(--text-primary);
+      max-width: 40ch;
+    }
+
+    .contacts {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 0.9rem;
+      min-width: 240px;
+      max-width: 320px;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      display: grid;
+      gap: 0.4rem;
+      position: relative;
+    }
+
+    .contacts::before {
+      content: "contact$";
+      position: absolute;
+      top: -0.6rem;
+      left: 0.75rem;
+      font-size: 0.7rem;
+      padding: 0 0.4rem;
+      background: var(--bg-panel);
+      color: var(--text-section);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      line-height: 1.4;
+    }
+
+    .contacts a {
+      color: var(--text-accent);
+      text-decoration: none;
+    }
+
+    .contacts a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+
+    .contact-label {
+      color: var(--text-dim);
+    }
+
+    /* ===== SECTIONS ===== */
+
+    .section {
+      margin-top: 1.5rem;
+    }
+
+    .section__title-line {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      font-size: 0.8rem;
+      line-height: 1.2;
+      color: var(--text-section);
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 10px rgba(191,95,255,0.6);
+    }
+
+    .section__title-prefix {
+      margin-right: 0.5rem;
+    }
+
+    .section__title {
+      font-weight: 600;
+      margin-right: 0.75rem;
+    }
+
+    .section__rule {
+      flex: 1;
+      min-width: 2rem;
+      height: 1px;
+      background: radial-gradient(circle, var(--text-section) 0%, transparent 70%);
+      opacity: 0.4;
+    }
+
+    .section__content {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .section__content p + p {
+      margin-top: 0.75rem;
+    }
+
+    /* ===== EXPERIENCE BLOCKS ===== */
+    .exp-block {
+      border-left: 2px solid var(--border-color);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .exp-block::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 0.4rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--text-section);
+      box-shadow:
+        0 0 10px rgba(191,95,255,0.7),
+        0 0 30px rgba(191,95,255,0.4);
+    }
+
+    .exp-headline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-role {
+      color: var(--text-accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .exp-place {
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+
+    .exp-time {
+      color: var(--text-date);
+      font-size: 0.75rem;
+    }
+
+    .exp-details {
+      display: grid;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+
+    .project-block {
+      background: rgba(0,0,0,0.15);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 0.9rem;
+    }
+
+    .project-title {
+      font-weight: 600;
+      color: var(--text-accent);
+      font-size: 0.8rem;
+      margin-bottom: 0.4rem;
+      text-shadow: 0 0 10px rgba(191,95,255,0.6);
+    }
+
+    .project-desc {
+      font-size: 0.8rem;
+      color: var(--text-primary);
+    }
+
+    /* ===== SKILLS / SIDE PANEL ===== */
+    .side-panel .terminal__body {
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .skill-group {
+      margin-bottom: 1rem;
+    }
+
+    .skill-label {
+      color: var(--text-section);
+      font-size: 0.75rem;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      text-shadow: 0 0 8px rgba(191,95,255,0.5);
+    }
+
+    .skill-content {
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .blinking-cursor {
+      display: inline-block;
+      width: 8px;
+      background: var(--text-section);
+      box-shadow: 0 0 8px rgba(191,95,255,0.8);
+      margin-left: 4px;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    /* subtle glow border on hover for interactive feel */
+    .terminal:hover {
+      box-shadow:
+        0 40px 90px rgba(0, 0, 0, 0.9),
+        0 0 60px rgba(187, 51, 255, 0.18);
+      border-color: var(--border-glow);
+    }
+
+    /* make links wrap nicely */
+    a {
+      word-break: break-word;
+    }
+
+    /* tiny helper chips */
+    .chiplist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .chip {
+      font-size: 0.7rem;
+      line-height: 1.2;
+      padding: 0.3rem 0.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background: rgba(0,0,0,0.2);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .chip--accent {
+      color: var(--text-accent);
+      border-color: var(--text-accent);
+      box-shadow: 0 0 12px rgba(187,51,255,0.5);
+    }
+
+    /* footer note */
+    .footer-note {
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      text-align: center;
+      margin-top: 2rem;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+
+    <!-- ===== MAIN COLUMN ===== -->
+    <section class="main-panel terminal">
+      <header class="terminal__header">
+        <div class="terminal__controls">
+          <span class="dot dot--close"></span>
+          <span class="dot dot--min"></span>
+          <span class="dot dot--max"></span>
+        </div>
+        <div class="terminal__title">itmo@lisa:~ resume.sh</div>
+        <div style="width:44px;"></div>
+      </header>
+
+      <div class="terminal__body">
+
+        <!-- INTRO -->
+        <div class="intro-block">
+          <div class="name-role">
+            <div class="name">Кирилл Костенко</div>
+            <div class="role">
+              Студент прикладной информатики (Университет ИТМО), fullstack-разработчик / AI engineer.
+              Специализация: NLP, LLM, агенты, RAG.
+            </div>
+          </div>
+
+          <aside class="contacts">
+            <div class="contact-line">
+              <span class="contact-label">tel:</span>
+              <a href="tel:+79217511191">+7&nbsp;921&nbsp;751-11-91</a>
+            </div>
+            <div class="contact-line">
+              <span class="contact-label">mail:</span>
+              <a href="mailto:JgSnapp@yandex.ru">JgSnapp@yandex.ru</a>
+            </div>
+            <div class="contact-line">
+              <span class="contact-label">github:</span>
+              <a href="https://github.com/JGSnapp" target="_blank" rel="noopener noreferrer">JGSnapp</a>
+            </div>
+            <div class="contact-line">
+              <span class="contact-label">tg:</span>
+              <a href="https://t.me/JgSnapp" target="_blank" rel="noopener noreferrer">@JgSnapp</a>
+            </div>
+          </aside>
+        </div>
+
+        <!-- ABOUT -->
+        <section class="section">
+          <div class="section__title-line">
+            <span class="section__title-prefix">$</span>
+            <span class="section__title">О себе</span>
+            <span class="section__rule"></span>
+          </div>
+          <div class="section__content">
+            <p>
+              Победитель конкурса ITMO.Stars. Имею опыт fullstack-разработки, сейчас активно
+              развиваюсь в области NLP / LLM и создании AI-агентов.
+              6+ месяцев практической работы в лаборатории LISA (ИТМО).
+            </p>
+            <p>
+              Выступал с докладами на стыке LLM и Computer Vision на конференциях ППС и КМУ
+              в Университете ИТМО.
+              Имеется опыт хакатонов, командной разработки, питчинга,
+              подготовки демо и презентаций, а также дизайна в Figma.
+            </p>
+          </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section class="section">
+          <div class="section__title-line">
+            <span class="section__title-prefix">$</span>
+            <span class="section__title">Опыт работы</span>
+            <span class="section__rule"></span>
+          </div>
+
+          <article class="exp-block">
+            <div class="exp-headline">
+              <div class="exp-role">Лаборант</div>
+              <div class="exp-place">Лаборатория LISA, Университет ИТМО</div>
+              <div class="exp-time">Янв. 2025 — н.в.</div>
+            </div>
+
+            <div class="exp-details">
+
+              <div class="project-block">
+                <div class="project-title">Telegram-бот поддержки лаборатории</div>
+                <div class="project-desc">
+                  Разработал Telegram-бота поддержки для лаборатории LISA.
+                  Внедрил RAG-систему на основе TF-IDF и чат-бота на модели YandexGPT-5.
+                  Подключил синтез речи через Yandex SpeechKit.
+                </div>
+              </div>
+
+              <div class="project-block">
+                <div class="project-title">Система подбора студентов в проектные команды</div>
+                <div class="project-desc">
+                  Построил систему для подбора студентов под проектную работу.
+                  Реализовал микросервисную архитектуру (docker-compose + FastAPI).
+                  Интегрировал RAG-систему с поддержкой разных моделей эмбеддингов
+                  из библиотек <code>transformers</code> и <code>sentence_transformers</code>.
+                  Добавил PostgreSQL как основную БД.
+                </div>
+              </div>
+
+              <div class="project-block">
+                <div class="project-title">Co-pilot для ПК</div>
+                <div class="project-desc">
+                  Создал ИИ-помощник, который анализирует содержимое экрана пользователя
+                  и поверх интерфейса показывает интерактивные подсказки:
+                  что нажать, куда перейти, как выполнить действие.
+                  Используется комбинация анализа скриншотов (Computer Vision)
+                  и пошаговых инструкций от LLM (ChatGPT API).
+                </div>
+              </div>
+
+              <div class="project-block">
+                <div class="project-title">Подбор кадров</div>
+                <div class="project-desc">
+                  Работаю над системой подбора подходящих кандидатов
+                  для отдела найма правительства Санкт-Петербурга.
+                  Использую LangGraph и генерацию агентами SQL-запросов
+                  к базе данных кандидатов.
+                </div>
+              </div>
+
+            </div>
+          </article>
+        </section>
+
+        <!-- HACKATHONS -->
+        <section class="section">
+          <div class="section__title-line">
+            <span class="section__title-prefix">$</span>
+            <span class="section__title">Хакатоны и проектные сессии</span>
+            <span class="section__rule"></span>
+          </div>
+
+          <article class="exp-block">
+            <div class="exp-headline">
+              <div class="exp-role">Тренажёр питча</div>
+              <div class="exp-time">хакатон / командная работа</div>
+            </div>
+            <div class="exp-details">
+              <div class="project-block">
+                <div class="project-desc">
+                  В команде разработали сервис для отработки питчей перед инвесторами и руководством.
+                  Я построил микросервисную архитектуру на <code>docker-compose</code>,
+                  работал над системой структурированного вывода у API Gemini,
+                  настроил транскрибацию речи с помощью модели Whisper.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="exp-block">
+            <div class="exp-headline">
+              <div class="exp-role">Подбор персонала</div>
+              <div class="exp-place">хакатон ЦИАН</div>
+              <div class="exp-time">командная работа</div>
+            </div>
+            <div class="exp-details">
+              <div class="project-block">
+                <div class="project-desc">
+                  Разрабатывали систему подбора кандидатов под нужды HR-отдела ЦИАН.
+                  Участвовал в разработке RAG-системы по резюме.
+                  Работал с API OpenAI для генерации эмбеддингов
+                  и со структурированным выводом ChatGPT.
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- ===== SIDE COLUMN ===== -->
+    <aside class="side-panel terminal">
+      <header class="terminal__header">
+        <div class="terminal__controls">
+          <span class="dot dot--close"></span>
+          <span class="dot dot--min"></span>
+          <span class="dot dot--max"></span>
+        </div>
+        <div class="terminal__title">itmo@lisa:~ skills.py</div>
+        <div style="width:44px;"></div>
+      </header>
+
+      <div class="terminal__body">
+
+        <div class="skill-group">
+          <div class="skill-label">Ключевые навыки</div>
+          <div class="skill-content chiplist">
+            <span class="chip chip--accent">Python</span>
+            <span class="chip">NLP</span>
+            <span class="chip">LLM</span>
+            <span class="chip">AI-агенты</span>
+            <span class="chip">RAG</span>
+            <span class="chip">Эмбеддинги</span>
+            <span class="chip">SQL</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Фреймворки и стек</div>
+          <div class="skill-content chiplist">
+            <span class="chip">FastAPI</span>
+            <span class="chip">Docker / docker-compose</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">LangGraph</span>
+            <span class="chip">Transformers</span>
+            <span class="chip">sentence_transformers</span>
+            <span class="chip">word2vec</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Инструменты и сервисы</div>
+          <div class="skill-content chiplist">
+            <span class="chip">OpenAI API</span>
+            <span class="chip">Gemini API</span>
+            <span class="chip">YandexGPT-5</span>
+            <span class="chip">Whisper (STT)</span>
+            <span class="chip">Yandex SpeechKit (TTS)</span>
+            <span class="chip">Telegram Bot API</span>
+            <span class="chip">Google API</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Стек вокруг продукта</div>
+          <div class="skill-content">
+            Хакатоны, командная разработка, питч повествований,
+            дизайн в Figma, подготовка интерактивных демо/презентаций.
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">>_ status</div>
+          <div class="skill-content">
+            Университет ИТМО, прикладная информатика<br/>
+            Лаборатория LISA<br/>
+            ITMO.Stars победитель
+            <span class="blinking-cursor"></span>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <footer class="footer-note" style="grid-column:1 / -1;">
+      Резюме сгенерировано в стиле терминала (TUI). Последнее обновление: 27.10.2025.
+    </footer>
+
+  </main>
+
+</body>
+</html>
