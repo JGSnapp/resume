@@ -306,12 +306,42 @@
       padding: 0.75rem 0.9rem;
     }
 
+    /* header row for project title + link */
+    .project-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.4rem;
+    }
+
     .project-title {
       font-weight: 600;
       color: var(--text-accent);
       font-size: 0.8rem;
-      margin-bottom: 0.4rem;
       text-shadow: 0 0 10px rgba(191,95,255,0.6);
+    }
+
+    /* pretty repo link pill */
+    .repo-link {
+      font-size: 0.7rem;
+      line-height: 1.2;
+      padding: 0.3rem 0.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--text-accent);
+      background: rgba(187,51,255,0.08);
+      color: var(--text-accent);
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(187,51,255,0.5);
+      white-space: nowrap;
+    }
+
+    .repo-link:hover {
+      text-decoration: underline;
+      box-shadow:
+        0 0 16px rgba(187,51,255,0.8),
+        0 0 40px rgba(187,51,255,0.4);
     }
 
     .project-desc {
@@ -474,14 +504,15 @@
           </div>
         </section>
 
-        <!-- EXPERIENCE -->
+        <!-- DEV EXPERIENCE -->
         <section class="section">
           <div class="section__title-line">
             <span class="section__title-prefix">$</span>
-            <span class="section__title">Опыт работы</span>
+            <span class="section__title">Опыт в разработке</span>
             <span class="section__rule"></span>
           </div>
 
+          <!-- LISA / ЛАБОРАНТ -->
           <article class="exp-block">
             <div class="exp-headline">
               <div class="exp-role">Лаборант</div>
@@ -492,7 +523,10 @@
             <div class="exp-details">
 
               <div class="project-block">
-                <div class="project-title">Telegram-бот поддержки лаборатории</div>
+                <div class="project-header">
+                  <div class="project-title">Telegram-бот поддержки лаборатории</div>
+                  <a class="repo-link" href="https://github.com/JGSnapp/Chattractive" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </div>
                 <div class="project-desc">
                   Разработал Telegram-бота поддержки для лаборатории LISA.
                   Внедрил RAG-систему на основе TF-IDF и чат-бота на модели YandexGPT-5.
@@ -501,7 +535,10 @@
               </div>
 
               <div class="project-block">
-                <div class="project-title">Система подбора студентов в проектные команды</div>
+                <div class="project-header">
+                  <div class="project-title">Система подбора студентов в проектные команды</div>
+                  <a class="repo-link" href="https://github.com/JGSnapp/MentorMatch" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </div>
                 <div class="project-desc">
                   Построил систему для подбора студентов под проектную работу.
                   Реализовал микросервисную архитектуру (docker-compose + FastAPI).
@@ -512,7 +549,10 @@
               </div>
 
               <div class="project-block">
-                <div class="project-title">Co-pilot для ПК</div>
+                <div class="project-header">
+                  <div class="project-title">Co-pilot для ПК</div>
+                  <a class="repo-link" href="https://github.com/LISA-ITMO/teept-gui-assistant" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </div>
                 <div class="project-desc">
                   Создал ИИ-помощник, который анализирует содержимое экрана пользователя
                   и поверх интерфейса показывает интерактивные подсказки:
@@ -523,7 +563,10 @@
               </div>
 
               <div class="project-block">
-                <div class="project-title">Подбор кадров</div>
+                <div class="project-header">
+                  <div class="project-title">Подбор кадров</div>
+                  <!-- приватный проект, без репозитория -->
+                </div>
                 <div class="project-desc">
                   Работаю над системой подбора подходящих кандидатов
                   для отдела найма правительства Санкт-Петербурга.
@@ -534,23 +577,22 @@
 
             </div>
           </article>
-        </section>
 
-        <!-- HACKATHONS -->
-        <section class="section">
-          <div class="section__title-line">
-            <span class="section__title-prefix">$</span>
-            <span class="section__title">Хакатоны и проектные сессии</span>
-            <span class="section__rule"></span>
-          </div>
-
+          <!-- ХАКАТОНЫ И ПРОЕКТЫ -->
           <article class="exp-block">
             <div class="exp-headline">
-              <div class="exp-role">Тренажёр питча</div>
-              <div class="exp-time">хакатон / командная работа</div>
+              <div class="exp-role">Хакатоны и проекты</div>
+              <div class="exp-place">командная разработка</div>
+              <div class="exp-time">2024 — 2025</div>
             </div>
+
             <div class="exp-details">
+
               <div class="project-block">
+                <div class="project-header">
+                  <div class="project-title">Тренажёр питча</div>
+                  <a class="repo-link" href="https://github.com/JGSnapp/AI-Product-Huck" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </div>
                 <div class="project-desc">
                   В команде разработали сервис для отработки питчей перед инвесторами и руководством.
                   Я построил микросервисную архитектуру на <code>docker-compose</code>,
@@ -558,17 +600,12 @@
                   настроил транскрибацию речи с помощью модели Whisper.
                 </div>
               </div>
-            </div>
-          </article>
 
-          <article class="exp-block">
-            <div class="exp-headline">
-              <div class="exp-role">Подбор персонала</div>
-              <div class="exp-place">хакатон ЦИАН</div>
-              <div class="exp-time">командная работа</div>
-            </div>
-            <div class="exp-details">
               <div class="project-block">
+                <div class="project-header">
+                  <div class="project-title">Подбор персонала (ЦИАН)</div>
+                  <!-- приватный код -->
+                </div>
                 <div class="project-desc">
                   Разрабатывали систему подбора кандидатов под нужды HR-отдела ЦИАН.
                   Участвовал в разработке RAG-системы по резюме.
@@ -576,8 +613,10 @@
                   и со структурированным выводом ChatGPT.
                 </div>
               </div>
+
             </div>
           </article>
+
         </section>
 
       </div>
@@ -658,7 +697,7 @@
     </aside>
 
     <footer class="footer-note" style="grid-column:1 / -1;">
-      Резюме сгенерировано в стиле терминала (TUI). Последнее обновление: 27.10.2025.
+      Последнее обновление: 27.10.2025.
     </footer>
 
   </main>
