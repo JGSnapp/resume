@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Кирилл Костенко — Резюме (purple)</title>
+  <title>Кирилл Костенко — Резюме (macOS light)</title>
   <style>
     /* ===== RESET ===== */
     * {
@@ -14,32 +14,32 @@
 
     /* ===== THEME (PURPLE NEON) ===== */
     :root {
-      --bg-main: #0a0612;
-      --bg-panel: #120d1f;
-      --bg-header: #1b122c;
-      --border-color: #3a2d53;
-      --border-glow: rgba(187, 51, 255, 0.4);
+      /* ===== THEME (macOS Light) ===== */
+      --bg-main: #f5f5f7;          /* page background */
+      --bg-panel: rgba(255, 255, 255, 0.92);
+      --bg-header: rgba(246, 246, 247, 0.88);
 
-      --text-primary: #f2e9ff;
-      --text-dim: #7b6e92;
-      --text-accent: #d17fff;
-      --text-section: #bf5fff;
-      --text-date: #ad8bff;
+      --border-color: rgba(60, 60, 67, 0.22); /* macOS separator */
+      --text-primary: #1d1d1f;
+      --text-dim: #6e6e73;
+      --text-accent: #0071e3;      /* Apple-like blue */
+      --text-section: #1d1d1f;
+      --text-date: #6e6e73;
 
-      --radius-lg: 14px;
-      --radius-md: 8px;
+      --radius-lg: 16px;
+      --radius-md: 10px;
 
-      --font-main: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     }
 
     body {
-      background-color: var(--bg-main);
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(187,51,255,0.08) 0%, transparent 60%),
-        radial-gradient(circle at 80% 10%, rgba(51,102,255,0.07) 0%, transparent 60%);
-      color: var(--text-primary);
+      background: radial-gradient(1200px 500px at 50% -10%, rgba(0,0,0,0.06), transparent 55%), var(--bg-main);
+color: var(--text-primary);
       font-family: var(--font-main);
-      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+line-height: 1.5;
       padding: 2rem;
       display: flex;
       justify-content: center;
@@ -66,8 +66,10 @@
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
       box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.9),
-        0 0 40px rgba(187, 51, 255, 0.12);
+        0 18px 50px rgba(0, 0, 0, 0.14),
+        0 2px 8px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       position: relative;
       overflow: hidden;
     }
@@ -75,37 +77,42 @@
     .terminal__header {
       background: var(--bg-header);
       border-bottom: 1px solid var(--border-color);
-      padding: 0.6rem 1rem;
+      padding: 0.55rem 0.9rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      letter-spacing: -0.03em;
+      font-size: 0.78rem;
+      color: rgba(60, 60, 67, 0.85);
+      letter-spacing: -0.02em;
+      user-select: none;
     }
 
     .terminal__controls {
       display: flex;
-      gap: 0.4rem;
+      gap: 0.45rem;
+      align-items: center;
+      padding-left: 0.1rem;
     }
 
     .dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      box-shadow: 0 0 8px currentColor;
+      box-shadow: none;
+      border: 1px solid rgba(0, 0, 0, 0.18);
     }
-    .dot--close  { background: #ff5f57; color: #ff5f57; }
-    .dot--min    { background: #febc2e; color: #febc2e; }
-    .dot--max    { background: #28c840; color: #28c840; }
-
-    .terminal__title {
-      color: var(--text-dim);
+    .dot--close { background: #ff5f57; }
+    .dot--min   { background: #febc2e; }
+    .dot--max   { background: #28c840; }    { background: #111; color: #111; opacity: 0.35; }.terminal__title {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: rgba(60, 60, 67, 0.9);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 70%;
       text-align: center;
-      flex: 1;
-      font-size: 0.75rem;
-      line-height: 1;
-      user-select: none;
     }
 
     .terminal__body {
@@ -143,8 +150,7 @@
       font-size: clamp(1.25rem, 1vw + 1rem, 1.4rem);
       font-weight: 600;
       color: var(--text-accent);
-      text-shadow: 0 0 16px rgba(191,95,255,0.6);
-    }
+      }
 
     .role {
       font-size: 0.8rem;
@@ -154,7 +160,7 @@
     }
 
     .contacts {
-      background: rgba(0,0,0,0.2);
+      background: transparent;
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 0.75rem 0.9rem;
@@ -184,6 +190,7 @@
     .contacts a {
       color: var(--text-accent);
       text-decoration: none;
+      border-bottom: 1px solid rgba(0, 113, 227, 0.25);
     }
 
     .contacts a:hover {
@@ -216,8 +223,7 @@
       line-height: 1.2;
       color: var(--text-section);
       margin-bottom: 0.75rem;
-      text-shadow: 0 0 10px rgba(191,95,255,0.6);
-    }
+      }
 
     .section__title-prefix {
       margin-right: 0.5rem;
@@ -232,8 +238,8 @@
       flex: 1;
       min-width: 2rem;
       height: 1px;
-      background: radial-gradient(circle, var(--text-section) 0%, transparent 70%);
-      opacity: 0.4;
+      background: rgba(60, 60, 67, 0.22);
+      opacity: 1;
     }
 
     .section__content {
@@ -247,7 +253,7 @@
 
     /* ===== EXPERIENCE BLOCKS ===== */
     .exp-block {
-      border-left: 2px solid var(--border-color);
+      border-left: 2px solid rgba(0,0,0,0.4);
       padding-left: 1rem;
       margin-bottom: 1.5rem;
       position: relative;
@@ -261,11 +267,9 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--text-section);
-      box-shadow:
-        0 0 10px rgba(191,95,255,0.7),
-        0 0 30px rgba(191,95,255,0.4);
-    }
+      background: var(--text-primary);
+      box-shadow: none;
+      }
 
     .exp-headline {
       display: flex;
@@ -300,7 +304,7 @@
     }
 
     .project-block {
-      background: rgba(0,0,0,0.15);
+      background: transparent;
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 0.75rem 0.9rem;
@@ -320,28 +324,25 @@
       font-weight: 600;
       color: var(--text-accent);
       font-size: 0.8rem;
-      text-shadow: 0 0 10px rgba(191,95,255,0.6);
-    }
+      }
 
     /* pretty repo link pill */
     .repo-link {
-      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
       line-height: 1.2;
-      padding: 0.3rem 0.5rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--text-accent);
-      background: rgba(187,51,255,0.08);
-      color: var(--text-accent);
+      padding: 0.32rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(60, 60, 67, 0.20);
+      background: rgba(60, 60, 67, 0.06);
+      color: rgba(29, 29, 31, 0.92);
       text-decoration: none;
-      box-shadow: 0 0 12px rgba(187,51,255,0.5);
       white-space: nowrap;
     }
 
     .repo-link:hover {
-      text-decoration: underline;
-      box-shadow:
-        0 0 16px rgba(187,51,255,0.8),
-        0 0 40px rgba(187,51,255,0.4);
+      border-color: rgba(60, 60, 67, 0.32);
+      background: rgba(60, 60, 67, 0.09);
     }
 
     .project-desc {
@@ -360,11 +361,10 @@
     }
 
     .skill-label {
-      color: var(--text-section);
+      color: rgba(29, 29, 31, 0.92);
       font-size: 0.75rem;
       margin-bottom: 0.4rem;
       font-weight: 600;
-      text-shadow: 0 0 8px rgba(191,95,255,0.5);
     }
 
     .skill-content {
@@ -375,10 +375,12 @@
 
     .blinking-cursor {
       display: inline-block;
-      width: 8px;
-      background: var(--text-section);
-      box-shadow: 0 0 8px rgba(191,95,255,0.8);
-      margin-left: 4px;
+      width: 7px;
+      height: 1.05em;
+      background: rgba(29, 29, 31, 0.75);
+      margin-left: 6px;
+      border-radius: 2px;
+      transform: translateY(2px);
       animation: blink 1s steps(1) infinite;
     }
 
@@ -390,9 +392,17 @@
     /* subtle glow border on hover for interactive feel */
     .terminal:hover {
       box-shadow:
-        0 40px 90px rgba(0, 0, 0, 0.9),
-        0 0 60px rgba(187, 51, 255, 0.18);
-      border-color: var(--border-glow);
+        0 20px 60px rgba(0, 0, 0, 0.16),
+        0 2px 10px rgba(0, 0, 0, 0.09);
+    }
+
+    code {
+      font-family: var(--font-mono);
+      padding: 0.08em 0.35em;
+      border: 1px solid rgba(60, 60, 67, 0.18);
+      border-radius: 6px;
+      background: rgba(60, 60, 67, 0.06);
+      font-size: 0.95em;
     }
 
     /* make links wrap nicely */
@@ -408,20 +418,23 @@
     }
 
     .chip {
-      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
       line-height: 1.2;
-      padding: 0.3rem 0.5rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-      background: rgba(0,0,0,0.2);
-      color: var(--text-primary);
+      padding: 0.32rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(60, 60, 67, 0.20);
+      background: rgba(60, 60, 67, 0.06);
+      color: rgba(29, 29, 31, 0.92);
       white-space: nowrap;
     }
 
     .chip--accent {
-      color: var(--text-accent);
-      border-color: var(--text-accent);
-      box-shadow: 0 0 12px rgba(187,51,255,0.5);
+      border-color: rgba(0, 113, 227, 0.35);
+      background: rgba(0, 113, 227, 0.10);
+      color: rgba(0, 113, 227, 0.98);
+      font-weight: 600;
+      text-decoration: none;
     }
 
     /* footer note */
@@ -432,6 +445,34 @@
       margin-top: 2rem;
       user-select: none;
     }
+
+    @media print {
+      body { padding: 0; background: #fff; }
+      .terminal { box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+      a { color: #000; text-decoration: underline; border-bottom: none; }
+    }
+      .terminal {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.14),
+        0 2px 8px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* macOS feel: keep most text proportional, but preserve mono for 'terminal-like' bits */
+    .terminal__title,
+    .prompt,
+    .repo-link,
+    .chip,
+    code {
+      font-family: var(--font-mono);
+    }
+
   </style>
 </head>
 <body>
@@ -530,7 +571,7 @@
                 <div class="project-desc">
                   Разработал Telegram-бота поддержки для лаборатории LISA.
                   Внедрил RAG-систему на основе TF-IDF и чат-бота на модели YandexGPT-5.
-                  Подключил синтез речи через Yandex SpeechKit.
+                  Подключил синтез речи по API через Yandex SpeechKit и локально через chatterbox.
                 </div>
               </div>
 
@@ -543,7 +584,7 @@
                   Построил систему для подбора студентов под проектную работу.
                   Реализовал микросервисную архитектуру (docker-compose + FastAPI).
                   Интегрировал RAG-систему с поддержкой разных моделей эмбеддингов
-                  из библиотек <code>transformers</code> и <code>sentence_transformers</code>.
+                  из библиотек transformers и sentence_transformers.
                   Добавил PostgreSQL как основную БД.
                 </div>
               </div>
@@ -565,13 +606,13 @@
               <div class="project-block">
                 <div class="project-header">
                   <div class="project-title">Подбор кадров</div>
-                  <!-- приватный проект, без репозитория -->
+                  <a class="repo-link" href="https://github.com/JGSnapp/SQL-HR" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
                 </div>
                 <div class="project-desc">
                   Работаю над системой подбора подходящих кандидатов
                   для отдела найма правительства Санкт-Петербурга.
-                  Использую LangGraph и генерацию агентами SQL-запросов
-                  к базе данных кандидатов.
+                  Использую LangGraph и генерацию агентами SQL-запросов через ORM
+                  к базе данных кандидатов на PostgreSQL. Разработал пользовательский интерфейс на streamlit и бэкенд на FastAPI.
                 </div>
               </div>
 
@@ -595,7 +636,7 @@
                 </div>
                 <div class="project-desc">
                   В команде разработали сервис для отработки питчей перед инвесторами и руководством.
-                  Я построил микросервисную архитектуру на <code>docker-compose</code>,
+                  Я построил микросервисную архитектуру на docker-compose,
                   работал над системой структурированного вывода у API Gemini,
                   настроил транскрибацию речи с помощью модели Whisper.
                 </div>
@@ -611,6 +652,19 @@
                   Участвовал в разработке RAG-системы по резюме.
                   Работал с API OpenAI для генерации эмбеддингов
                   и со структурированным выводом ChatGPT.
+                </div>
+              </div>
+
+              <div class="project-block">
+                <div class="project-header">
+                  <div class="project-title">Классификация комментариев</div>
+                  <a class="repo-link" href="https://github.com/JGSnapp/TF-IDF" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </div>
+                <div class="project-desc">
+                  Собрал несколько моделей для классификации комментариев:
+                  классический пайплайн TF-IDF + Logistic Regression,
+                  а также дообучил несколько вариантов ruBERT с помощью библиотеки transformers.
+                  Добавил хранение данных в PostgreSQL и сделал фронтенд на streamlit.
                 </div>
               </div>
 
@@ -640,9 +694,14 @@
           <div class="skill-label">Ключевые навыки</div>
           <div class="skill-content chiplist">
             <span class="chip chip--accent">Python</span>
+
             <span class="chip">NLP</span>
             <span class="chip">LLM</span>
             <span class="chip">AI-агенты</span>
+            <span class="chip">NumPy</span>
+            <span class="chip">pandas</span>
+            <span class="chip">scikit-learn</span>
+            <span class="chip">Streamlit</span>
             <span class="chip">RAG</span>
             <span class="chip">Эмбеддинги</span>
             <span class="chip">SQL</span>
